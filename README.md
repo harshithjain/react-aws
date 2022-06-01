@@ -1,6 +1,37 @@
-# Getting Started with Create React App
+This project is an example for building React application using AWS.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Here 
+<li>React is front end layer</li>
+<li>Dynamodb is Backend layer for getting data</li>
+<li>AWS lambda covered with API Gateway acts as middle layer which can be invoked from React <li>
+  
+  
+### AWS Services Used:
+<b>AWS DynamoDB</b>
+This service is used to Create/Insert records Tables and store default static data.
+
+<b>AWS Amplify</b>
+This services is connected with my github url, so that the application is auto build and deployed whenever there is a push made to "main" branch of this repo. The AWS Amplify pulls the code from {main} branch and host the same at "https://main.dpn2zrwfwlxsn.amplifyapp.com/"
+
+<b>AWS Lambda:</b> 
+This service is used to query/retrieve the data from Dynamodb using aws-sdk.
+
+We created 4 different lambda functions as part of this project which gets the data from DynamoDB. This Lambda is inturn added as Integration to API Gateway
+
+
+<b>API Gateway:</b> 
+This service is used to create an HTTP service which can be used by React application to get the Data. The API Gateway uses the Lambda functions created as part of their Integrations while defining ROUTES for the service.
+
+Endpoint: This is the "Development" stage endpoint "https://bqgn8o5c4d.execute-api.us-east-1.amazonaws.com/Development/" which is deployed in EAB AWS. It also has the following routes for getting different data:
+<li>/accessibility</li>
+<li>/services</li>
+<li>/menu</li>
+<li>/images</li>
+
+### Code Strucure
+
+We have added few scripts under <b>components/scripts</b> folder which are responsible to Create DynanoDB or Insert Data into DynamoDB. To do this via terminal navigate to script folder and execute $ node {fileName}
+
 
 ## Available Scripts
 
@@ -13,11 +44,6 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
 ### `npm run build`
 
@@ -44,27 +70,6 @@ You don't have to ever use `eject`. The curated feature set is suitable for smal
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
-
-### AWS DynamoDB
-
-<b>components/scripts</b>
-
-Contains information about DynamoDB table name and Values. To execute a script run from terminal "scripts % node {filename}"
-This will create/Insert data into Dynamodb table.
-
-
-<b>API Endpoints:</b> "https://bqgn8o5c4d.execute-api.us-east-1.amazonaws.com/Development/" is deployed in EAB Developer AWS console.
-
-Routes:
-<li>/accessibility</li>
-<li>/services</li>
-<li>/menu</li>
-<li>/images</li>
-
-
-We created 4 different lambda functions which gets the data from DynamoDB. This Lambda is inturn added as Integration to API Gateway
-The same API gateway is used to host 4 different HTTP api for Services, accessibility, images, menu by adding more routes to it
-
 
 ### Analyzing the Bundle Size
 
