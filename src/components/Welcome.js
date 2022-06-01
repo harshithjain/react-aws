@@ -1,14 +1,26 @@
-import React from 'react';
-import galleryImagesData from './data/gallery_images.json';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+//import galleryImagesData from './data/gallery_images.json';
 
 const Welcome = () => {
+    const [galleryImagesData, setGalleryImagesData] = useState([]);
+
+    const loadGalleryImagesData = async() => {
+        //Query API Gateway
+        const response = await axios.get(`https://bqgn8o5c4d.execute-api.us-east-1.amazonaws.com/Development/images`);
+        setGalleryImagesData(response.data);
+    }
+    
+    useEffect(() => {
+        loadGalleryImagesData();
+    }, [])
     return(
         <div className="scene" id="welcome">
             <article className="content">
               <div className="gallery">
                 {
                   galleryImagesData.map((images) => 
-                    <img className={images.className} src={images.src} alt={images.alt} />
+                    <img key={images.src} className={images.className} src={images.src} alt={images.alt} />
                   )
                 }
               </div>

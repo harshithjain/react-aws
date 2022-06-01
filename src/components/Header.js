@@ -1,7 +1,19 @@
-import React from 'react';
-import menuLinksData from './data/menu_links.json';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+// https://bqgn8o5c4d.execute-api.us-east-1.amazonaws.com/Development/images
 
 const Header = () => {
+    const [menuLinksData, setMenuLinksData] = useState([]);
+
+    const loadMenuLinksData = async() => {
+        //Query API Gateway
+        const response = await axios.get(`https://bqgn8o5c4d.execute-api.us-east-1.amazonaws.com/Development/menu`);
+        setMenuLinksData(response.data);
+    }
+    
+    useEffect(() => {
+        loadMenuLinksData();
+    }, [])
     return (
         <header id="intro">
             <article className="fullheight">
@@ -18,7 +30,7 @@ const Header = () => {
                 <ul>
                     {
                         menuLinksData.map((link) => 
-                            <li><a className={`icon ${link.class}`} href={link.href}><span>{link.name}</span></a></li>
+                            <li key={link.text}><a className={`icon ${link.class}`} href={link.href}><span>{link.text}</span></a></li>
                         )
                     }
                 </ul>

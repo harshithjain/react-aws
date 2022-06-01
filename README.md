@@ -45,9 +45,26 @@ You can learn more in the [Create React App documentation](https://facebook.gith
 
 To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
+### AWS DynamoDB
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+<b>components/scripts</b>
+
+Contains information about DynamoDB table name and Values. To execute a script run from terminal "scripts % node {filename}"
+This will create/Insert data into Dynamodb table.
+
+
+<b>API Endpoints:</b> "https://bqgn8o5c4d.execute-api.us-east-1.amazonaws.com/Development/" is deployed in EAB Developer AWS console.
+
+Routes:
+<li>/accessibility</li>
+<li>/services</li>
+<li>/menu</li>
+<li>/images</li>
+
+
+We created 4 different lambda functions which gets the data from DynamoDB. This Lambda is inturn added as Integration to API Gateway
+The same API gateway is used to host 4 different HTTP api for Services, accessibility, images, menu by adding more routes to it
+
 
 ### Analyzing the Bundle Size
 
