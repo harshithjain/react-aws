@@ -8,7 +8,7 @@ AWS.config.update({
 console.log("Writing into GalleryImages Table");
 
 var dynamodb = new AWS.DynamoDB.DocumentClient();
-var galleryImagesData = JSON.parse(fs.readFileSync('../components/data/gallery_images.json'));
+var galleryImagesData = JSON.parse(fs.readFileSync('../data/gallery_images.json'));
 
 galleryImagesData.forEach((images) => {
     var className = images.className

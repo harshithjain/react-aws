@@ -8,7 +8,7 @@ AWS.config.update({
 console.log("Writing into MenuLinks Table");
 
 var dynamodb = new AWS.DynamoDB.DocumentClient();
-var galleryImagesData = JSON.parse(fs.readFileSync('../components/data/menu_links.json'));
+var galleryImagesData = JSON.parse(fs.readFileSync('../data/menu_links.json'));
 
 galleryImagesData.forEach((links) => {
     var params = {

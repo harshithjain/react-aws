@@ -8,7 +8,7 @@ AWS.config.update({
 console.log("Writing into Services Table");
 
 var dynamodb = new AWS.DynamoDB.DocumentClient();
-var servicesData = JSON.parse(fs.readFileSync('../components/data/Services.json'));
+var servicesData = JSON.parse(fs.readFileSync('../data/Services.json'));
 
 servicesData.forEach((services) => {
     var params = {

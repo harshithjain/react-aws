@@ -8,7 +8,7 @@ AWS.config.update({
 console.log("Writing into Accessibility Table");
 
 var dynamodb = new AWS.DynamoDB.DocumentClient();
-var accessibilityData = JSON.parse(fs.readFileSync('../components/data/accessibility.json'));
+var accessibilityData = JSON.parse(fs.readFileSync('../data/accessibility.json'));
 
 accessibilityData.forEach((accessibility) => {
     var params = {

@@ -5,26 +5,32 @@ import axios from 'axios';
 //import accessibilityData from './data/accessibility.json';
 
 
-const HotelInfo = () => {
-
-    const [servicesData, setServicesData] = useState([]);
-    const [accessibilityData, setAccessibilityData] = useState([]);
-
-    const loadAccessibilityData = async() => {
-        //Query API Gateway
-        const response = await axios.get(`https://bqgn8o5c4d.execute-api.us-east-1.amazonaws.com/Development/accessibility`);
-        setAccessibilityData(response.data);
+class HotelInfo extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      accessibilityData : []
     }
-    const loadServicesData = async() => {
-      //Query API Gateway
-      const response = await axios.get(`https://bqgn8o5c4d.execute-api.us-east-1.amazonaws.com/Development/services`);
-      setServicesData(response.data);
-    }
-    
-    useEffect(() => {
-      loadAccessibilityData();
-      loadServicesData();
-    }, [])
+  }
+  loadAccessibilityData = async() => {
+    //Query API Gateway
+    const response = await axios.get(`https://bqgn8o5c4d.execute-api.us-east-1.amazonaws.com/Development/accessibility`);
+    this.setState({
+      accessibilityData : response.data
+    })
+  }
+  loadServicesData = async() => {
+    //Query API Gateway
+    const response = await axios.get(`https://bqgn8o5c4d.execute-api.us-east-1.amazonaws.com/Development/services`);
+    this.props.loadServices(response.data);
+  }
+  componentWillMount(){
+    this.loadAccessibilityData();
+    this.loadServicesData();
+  }
+  render() {
+    const { hotelServicesData } = this.props;
+    const { accessibilityData } = this.state;
     return(
       <div className="scene" id="hotelinfo">
         <article className="heading">
@@ -47,7 +53,7 @@ const HotelInfo = () => {
             <p>Our services and amenities are designed to make your travel easy, your stay comfortable, and your experience one-of-a-kind.</p>
             <ul>
               {
-                servicesData.map((services) => 
+                hotelServicesData.map((services) => 
                   <li key={services.name}>{services.name}</li>
                 )
               }
@@ -71,6 +77,7 @@ const HotelInfo = () => {
         </article>
       </div>
     );
+  }
 }
 
 export default HotelInfo;
